@@ -1,0 +1,15 @@
+
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: SaudiDevOps_CICD
+  labels:
+    app:  SaudiDevOps_CICD
+spec:
+  selector:
+    app: SaudiDevOps_CICD
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 80
+      nodePort: 31200

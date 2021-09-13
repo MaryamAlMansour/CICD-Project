@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: SaudiDevOps_CICD
+spec:
+  selector:
+    matchLabels:
+      app:  SaudiDevOps_CICD
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app:  SaudiDevOps_CICD
+    spec:
+      containers:
+      - name: SaudiDevOps_CICD
+        image:  NadirTech1/SaudiDevOps_CICD
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        
