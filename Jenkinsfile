@@ -30,5 +30,15 @@
                 sh "docker rmi $imagename:latest"
         }
         }
+
+        stage('Ansible Book'){
+            steps{
+                script{
+                    def image_id = registry + ":$BUILD_NUMBER"
+                    sh "ansible-playbook  Ansible-playbook.yml --extra-vars \"image_id=${image_id}\""
+                    ansiblePlaybook become: true, installation: 'Ansible-Belt3', inventory: 'hosts', playbook: 'Ansible-playbook.yml'
+                }
+            }
+        }
 }
  }
