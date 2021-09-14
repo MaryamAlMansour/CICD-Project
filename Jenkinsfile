@@ -3,8 +3,6 @@ pipeline {
     imagename = "nginx"
   }
     agent any
-    def app
-    def web
 	stages {
         stage('Cloning repository from Git') {
             steps{
@@ -15,15 +13,15 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                app = docker.build("$imagename")
+                  def app = docker.build("$imagename")
     } } }
 
         stage('Pushing image to Docker-Hub') {
             steps{
                 script{
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-id') {
-                    app.push("v1.${env.BUILD_NUMBER}")
-                    app.push("latest")
+                    def app.push("v1.${env.BUILD_NUMBER}")
+                    def app.push("latest")
                 }
                 } 
         } }
