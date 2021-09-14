@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: SaudiDevOps_CICD
-        image:  NadirTech1/SaudiDevOps_CICD
+        image:  nginx:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
