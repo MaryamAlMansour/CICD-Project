@@ -19,9 +19,10 @@ pipeline {
         stage('Pushing image to Docker-Hub') {
             steps{
                 script{
+		    def app 
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-id') {
-                    def app.push("v1.${env.BUILD_NUMBER}")
-                    def app.push("latest")
+                    app.push("v1.${env.BUILD_NUMBER}")
+                    app.push("latest")
                 }
                 } 
         } }
