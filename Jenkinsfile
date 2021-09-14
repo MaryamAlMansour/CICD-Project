@@ -1,4 +1,4 @@
- pipeline {
+pipeline {
     environment {
     imagename = "nginx"
   }
@@ -7,27 +7,33 @@
     def web
 	stages {
         stage('Cloning repository from Git') {
-
-            checkout scm
-        }
+            steps{
+                script{
+                    checkout scm
+        }}}
 
         stage('Building image') {
-
+            steps{
+                script {
                 app = docker.build("$imagename")
-    }
+    } } }
 
         stage('Pushing image to Docker-Hub') {
-
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-id') {
-                app.push("v1.${env.BUILD_NUMBER}")
-                app.push("latest")
+            steps{
+                script{
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-id') {
+                    app.push("v1.${env.BUILD_NUMBER}")
+                    app.push("latest")
+                }
                 } 
-        }
+        } }
 
         stage('docker image clean up'){
             steps{
+                script{
                 sh "docker rmi $imagename:$BUILD_NUMBER"
                 sh "docker rmi $imagename:latest"
+        }
         }
         }
 
