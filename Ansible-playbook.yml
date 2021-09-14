@@ -4,7 +4,7 @@
   - name: delete old deployment
     command: kubectl delete -f /opt/deployment.yml
 
-  - name: create service
+  - name: delete old service
     command: kubectl delete -f /opt/service.yml
 
   - name: create deployment
